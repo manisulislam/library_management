@@ -36,3 +36,10 @@ class UserLoginView(LoginView):
         sweetify.success(self.request, 'You Logged In Successfully', icon='success')
         
         return reverse_lazy('home')
+    
+class UserLogoutView(LogoutView):   
+    
+    def get_success_url(self) :
+        sweetify.success(self.request, 'You Logged Out Successfully', icon='success')
+        
+        return reverse_lazy('home')
