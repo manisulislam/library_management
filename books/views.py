@@ -3,9 +3,11 @@ from django.views.generic import DetailView
 from .models import BookModel,BuyBookModel
 from django.shortcuts import get_object_or_404
 import sweetify
-
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
-class BookDetailView(DetailView):
+
+class BookDetailView(LoginRequiredMixin,DetailView):
     template_name = 'books/book_detail.html'
     def get(self, request, *args, **kwargs):
         book=get_object_or_404(BookModel, pk=kwargs['pk'])
@@ -14,7 +16,7 @@ class BookDetailView(DetailView):
         }
         return render(request, self.template_name, context)
 
-
+@login_required
 def BuyBook(request,id):
     book=get_object_or_404(BookModel, pk=id)
     book_price=book.book_price

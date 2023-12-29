@@ -8,6 +8,7 @@ import sweetify
 from django.contrib.auth.views import LoginView,LogoutView
 from books.models import BuyBookModel
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
 class UserRegisterView(View):
     template_name = 'accounts/registration.html'
