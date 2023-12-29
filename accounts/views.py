@@ -6,7 +6,8 @@ from .forms import UserRegistrationForm
 from django.urls import reverse_lazy
 import sweetify
 from django.contrib.auth.views import LoginView,LogoutView
-
+from books.models import BuyBookModel
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 class UserRegisterView(View):
     template_name = 'accounts/registration.html'
@@ -43,3 +44,19 @@ class UserLogoutView(LogoutView):
         sweetify.success(self.request, 'You Logged Out Successfully', icon='success')
         
         return reverse_lazy('home')
+
+class UserProfileView(LoginRequiredMixin,View):
+    template_name = 'accounts/profile.html'
+    
+    def get(self, request):
+        reports=BuyBookModel.objects.filter(user=request.user)
+        return render(request, self.template_name,{'reports':reports})
+    
+    
+def ReturnBook(request,id):
+    current_book=BuyBookModel.objects.get(id=id)
+    current_book.user.account.balance+=current_book.book.book_price
+    current_book.user.account.save(update_fields=['balance'])
+    current_book.delete()
+    sweetify.success(request, 'Book Returned Successfully', icon='success')
+    return redirect('profile')

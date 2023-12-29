@@ -1,8 +1,9 @@
 from django.shortcuts import render,redirect
 from django.views.generic import DetailView
-from .models import BookModel
+from .models import BookModel,BuyBookModel
 from django.shortcuts import get_object_or_404
 import sweetify
+
 # Create your views here.
 class BookDetailView(DetailView):
     template_name = 'books/book_detail.html'
@@ -23,6 +24,7 @@ def BuyBook(request,id):
     if user_balance>=book_price:
         request.user.account.balance-=book_price
         request.user.account.save(update_fields=['balance'])
+        BuyBookModel.objects.create(user=request.user,book=book)
         sweetify.success(request, 'Book Purchased Successfully', icon='success')
         return redirect('home')
     

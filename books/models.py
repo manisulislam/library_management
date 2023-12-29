@@ -1,5 +1,6 @@
 from django.db import models
 from category.models import BookCategoryModel
+from django.contrib.auth.models import User
 # Create your models here.
 
 class BookModel(models.Model):
@@ -12,3 +13,12 @@ class BookModel(models.Model):
     def __str__(self):
         return self.book_title
     
+class BuyBookModel(models.Model):
+    book=models.ForeignKey(BookModel,on_delete=models.CASCADE)
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    created_on=models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        ordering=['created_on']
+    def __str__(self):
+        return self.book.book_title
