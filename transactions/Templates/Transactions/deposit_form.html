@@ -1,13 +1,12 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
-
 {% block title %}
 <title>
-    Registration
+    Deposit
 </title>
 {% endblock %}
 {% block content %}
-<h1 class="text-center text-primary mt-3">Registration </h1>
+<h1 class="text-center text-primary mt-3">Deposit</h1>
 <form action="" method="post" style="width: 50%; margin: auto;" class="mt-5">
     {% csrf_token %}
     {{form | crispy }}

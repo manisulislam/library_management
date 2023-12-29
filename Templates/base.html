@@ -28,7 +28,7 @@
             {% if request.user.is_authenticated %}
 
             <li class="nav-item">
-              <a class="nav-link" href="#">Deposit</a>
+              <a class="nav-link" href="{% url 'deposit' %}">Deposit</a>
             </li>
             {% endif %}
           </ul>
@@ -36,6 +36,8 @@
 
 
             {% if request.user.is_authenticated %}
+
+            <h5 class="mt-2"> welcome,{{request.user.first_name}}  (balance : {{request.user.account.balance}}) $</h5>
             <a href="#"><button class="btn btn-outline-primary" type="submit">Profile</button></a>
             <a href="{% url 'logout' %}"><button class="btn btn-outline-danger" type="submit">Logout</button></a>
             {% else %}

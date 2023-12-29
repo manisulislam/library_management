@@ -21,8 +21,8 @@ class UserRegisterView(View):
         form = self.form_class(request.POST)
         if form.is_valid():
             form.save()
-            sweetify.success(request, 'You Registered Successfully', icon='success')
-            return redirect('home')
+            sweetify.success(request, 'You Registered Successfully. Please log in first.', icon='success')
+            return redirect('login')
         return render(request, self.template_name, {'form': form})
     
     
