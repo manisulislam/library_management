@@ -1,7 +1,7 @@
 
 from dotenv import load_dotenv
 import os
-
+import dj_database_url
 load_dotenv()
 from pathlib import Path
 
@@ -82,14 +82,20 @@ WSGI_APPLICATION = 'library_management.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        # Feel free to alter this value to suit your needs.
+        default='postgres://mamarbank_cwxz_user:BYIJX5KFKwMjAcMUbM1Mu3HqhQ2h1g6W@dpg-cm642p21hbls73amut80-a.oregon-postgres.render.com/mamarbank_cwxz',
+        
+    )
 }
-
-
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
