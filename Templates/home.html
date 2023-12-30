@@ -61,8 +61,8 @@
             <div class="card-body">
                 <h5 class="card-title">Book title: {{item.book_title | truncatewords:5}}</h5>
                 <p class="card-text"><b>Book description:</b> {{item.book_description | truncatewords:10}}</p>
-                <h3>Price: {{item.book_price}}$</h3>
-                <h4>Category name: {{item.book_category.name}}</h4>
+                <h3>Price: {{item.book_price}} taka </h3>
+                <p>Category name: {{item.book_category.name}}</p>
                 <a href="{% url 'book_detail' item.id %}">
                     <button class="btn btn-outline-primary">View Details</button>
                 </a>

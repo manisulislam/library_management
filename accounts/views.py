@@ -53,7 +53,7 @@ class UserProfileView(LoginRequiredMixin,View):
         reports=BuyBookModel.objects.filter(user=request.user)
         return render(request, self.template_name,{'reports':reports})
     
-    
+@login_required()
 def ReturnBook(request,id):
     current_book=BuyBookModel.objects.get(id=id)
     current_book.user.account.balance+=current_book.book.book_price
@@ -61,3 +61,4 @@ def ReturnBook(request,id):
     current_book.delete()
     sweetify.success(request, 'Book Returned Successfully', icon='success')
     return redirect('profile')
+
