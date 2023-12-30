@@ -22,3 +22,13 @@ class BuyBookModel(models.Model):
         ordering=['created_on']
     def __str__(self):
         return self.book.book_title
+
+class Comment(models.Model):
+    book=models.ForeignKey(BookModel,on_delete=models.CASCADE, related_name='comments')
+    name=models.CharField(max_length=100)
+    body=models.TextField()
+    created_on=models.DateTimeField(auto_now_add=True)
+    
+    
+    def __str__(self):
+        return self.name
